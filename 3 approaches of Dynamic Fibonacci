@@ -1,0 +1,95 @@
+// Resursion
+// input: 10
+// outoput: 55 (109 steps)
+
+import java.util.Scanner;
+
+public class Pp1 {
+    static int count = 0;
+    public static void main(String [] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int [] memo = new int[30];
+        System.out.println(fab(n,memo));
+        System.out.println(count);
+        sc.close();
+    }
+
+    static int fab(int n, int [] memo) {
+        if (n==1 || n== 2) {
+            count++;
+            return 1;
+        }
+        count++;
+        int result = fab(n-1,memo) + fab(n-2,memo);
+        return result;
+    }
+}
+
+// Memoize
+// Input: 10
+// Output: 55 (17 steps)
+import java.util.Scanner;
+
+public class Pp1 {
+    static int count = 0;
+    public static void main(String [] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int [] memo = new int[30];
+        System.out.println(fab(n,memo));
+        System.out.println(count);
+        sc.close();
+    }
+
+    static int fab(int n, int [] memo) {
+        if (memo[n] != 0) {
+            count++;
+            return memo[n];
+
+        }
+        if (n==1 || n== 2) {
+            count++;
+            return 1;
+        }
+        count++;
+        int result = fab(n-1,memo) + fab(n-2,memo);
+        memo[n] = result;
+        return result;
+    }
+}
+
+
+// Bottom-up 
+// Input: 10
+// Ouput: 55 (28 steps)
+
+import java.util.Scanner;
+
+public class Pp1 {
+    static int count = 0;
+    public static void main(String [] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        System.out.println(fab(n));
+        System.out.println(count);
+        sc.close();
+    }
+
+    static int fab(int n) {
+        if (n==1 || n== 2) {
+            count++;
+            return 1;
+        }
+        int [] fabi = new int[30+1];
+        fabi[1] = 1;
+        fabi[2] = 1;
+        for (int i=3; i<fabi.length; i++) {
+            count++;
+            fabi[i] = fabi[i-1] + fabi[i-2];
+        }
+        return fabi[n];
+    }
+}
+
+
